@@ -512,6 +512,7 @@ def _WriteRecoveryImageToBoot(script, output_zip):
     script.WriteRawImage("/boot", "recovery.img")
 
 
+
 def HasRecoveryPatch(target_files_zip):
   namelist = [name for name in target_files_zip.namelist()]
   return ("SYSTEM/recovery-from-boot.p" in namelist or
@@ -833,7 +834,9 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   script.ShowProgress(0.05, 5)
   script.WriteRawImage("/boot", "boot.img")
-
+#Added by Abhiram 
+  common.ZipWriteStr(output_zip, "Divine/Divine.zip", ""+input_zip.read("SYSTEM/addon.d/Divine.zip"))
+  script.FlashDivine()
   script.ShowProgress(0.2, 10)
   device_specific.FullOTA_InstallEnd()
 
